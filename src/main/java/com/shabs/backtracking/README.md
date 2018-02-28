@@ -1,0 +1,7 @@
+- start from a location/cell.
+- from here findAllPossible locations
+- loop through these location
+- tentatively confirm the move
+- recursively call placement again
+- if you reach the end without issues then keep the confirmation - this move becomes valid
+- else remove confirmation and try out another possible location
