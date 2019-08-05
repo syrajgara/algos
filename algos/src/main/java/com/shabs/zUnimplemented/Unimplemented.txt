@@ -1,0 +1,6 @@
+https://leetcode.com/problems/perfect-squares
+https://leetcode.com/problems/find-peak-element
+https://leetcode.com/problems/game-of-life
+https://leetcode.com/problems/insert-delete-getrandom-o1
+https://leetcode.com/problems/kth-smallest-element-in-a-bst
+https://leetcode.com/problems/course-schedule

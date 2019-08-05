@@ -1,0 +1,146 @@
+package com.shabs.zUnimplemented;
+
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import java.util.concurrent.TimeUnit;
+
+
+// https://dzone.com/articles/jax-rs-20-asynchronous-server-and-client
+
+@Stateless
+@Path("/asyncresource")
+@Produces (APPLICATION_JSON)
+public class AsynchronousResource {
+
+  @Resource(lookup = "java:comp/DefaultManagedThreadFactory")
+  private ManagedThreadFactory threadFactory;
+
+  @GET
+  @Asynchronous
+  public void asyncRestMethod(@Suspended final AsyncResponse asyncResponse) {
+
+    asyncResponse.setTimeoutHandler(new TimeoutHandler() {
+      @Override
+      public void handleTimeout(AsyncResponse asyncResponse) {
+        asyncResponse.resume(Response.status
+            (Response.Status.SERVICE_UNAVAILABLE)
+            .entity("TIME OUT !").build());
+      }
+    });
+
+    asyncResponse.setTimeout(40, TimeUnit.SECONDS);
+
+    Thread thread = threadFactory.newThread(new Runnable() {
+      @Override
+      public void run() {
+        String result = heavyLifting();
+        asyncResponse.resume(result);
+      }
+
+      private String heavyLifting() {
+        return "RESULT";
+      }
+    });
+    thread.start();
+  }
+}
+
+
+// video: id (string), artists (collection, including roles)
+// e.g. video: id = "123", artists: [{name: "Beyonce", role: "Main", sort: 1}]
+// can be multiple roles, role types = Main, Featured, Associated
+// can be sorted
+
+// api: allows create/remove/modify video roles
+
+// note: for data storage, can completely Mock/Fake
+
+
+// {name: "Beyonce", role: "Main", sort: 1}
+// {name: "Justin Bieber", role: "Featured", sort: 1}
+// {name: "Jay-Z", role: "Featured", sort: 2}
+
+// Error -- {httpErrorCode: "404", message: "Not Found"}
+
+  /*
+  GET /api/video/{id}
+  GET /api/video/{id}/artists
+
+  GET /api/video/{id}/artists/{name}
+  PUT /api/video/{id}/artists-role
+  DELETE /api/video/{id}/artists-role/{name}
+  */
+
+  //ExceptionMapper<Throwable> -- to handle exceptions
+
+  @Path("/api/video")
+  public class VideoResource {
+
+    @GET
+    @Path("/{id}")
+    @Produces ({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public ArtistRole get(String id) {
+      return Video.getInstance(id); // VideoServiceException
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes ({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public void put(String id, ArtistRole role) {
+      Video video = Video.getInstance(id);
+      video.update(role);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes({"application/xml", "application/json"})
+    public void delete(String id, String roleName) {
+      Video video = Video.getInstance(id);
+      video.delete(roleName);
+    }
+  }
+
+  public class Video {
+    String id;
+    Map<String, ArtistRole> roles = new HashMap<>();
+
+    private static Video video;
+
+    public static Video getInstance(String id) {
+      if (video == null) {
+        synchronized(Video.class) {
+          if (video == null) {
+            try {
+              video = VideoDBService.get(id);
+            } catch (ObjectNotFoundException ex) {
+              throw new VideoServiceException("404", "Not Found", ex);
+            }
+          }
+        }
+      }
+
+      return video;
+    }
+
+    public void delete(String roleName) {
+      if (roles.contains(roleName) {
+        roles.remove(roleName);
+      }
+    }
+
+    public void put(ArtistRole role) {
+      delete(role.name);
+      roles.put(role.name, role);
+    }
+  }
+
+  public class ArtistRole {
+    public String name;
+    public String role;
+    public int sortOrder;
+  }
+
