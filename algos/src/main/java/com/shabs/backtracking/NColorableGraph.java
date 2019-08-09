@@ -99,7 +99,7 @@ public class NColorableGraph {
     // N1 -> N3 -> N7,N8 -> N11
     //    -> N4 -> N9,N10 -> N11
 
-    GraphNode<Integer> node1 = new GraphNode<Integer>(1);
+    GraphNode<Integer> node1 = new GraphNode(1);
 
     GraphNode<Integer> node2 = node1.addNode(2);
     GraphNode<Integer> node3 = node1.addNode(3);
@@ -139,7 +139,7 @@ public class NColorableGraph {
     nodes.add(node11);
 
 
-    // FAILURE CASE: this will make node 9 and 10 adjacent and so will force it to be of differnt color,
+    // FAILURE CASE: this will make node 9 and 10 adjacent and so will force it to be of different color,
     // which is not possible - and the test should fail.
     //node9.addNode(node10);
 

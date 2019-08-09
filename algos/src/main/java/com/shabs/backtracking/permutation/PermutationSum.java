@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 /**
  * Given sum=4 find all the permutation of int that will make the sum=4
  * {1,1,1,1},{1,1,2},{1,2,1},{1,3}
- * {2,1,1},
- * {2, 2}
+ * {2,1,1},{2,2}
  * {3,1},
  * {4}...
  * <p>
@@ -35,7 +34,7 @@ public class PermutationSum {
         System.out.print(value + " ");
       }
     }
-    System.out.println("");
+    System.out.println();
   }
 
   @Test

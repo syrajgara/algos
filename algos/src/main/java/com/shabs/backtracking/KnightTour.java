@@ -51,53 +51,65 @@ public class KnightTour {
 
     row = fromPoint.row + 2;
     col = fromPoint.column + 1;
-    if (row < bLen && col < bLen && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     row = fromPoint.row + 2;
     col = fromPoint.column - 1;
-    if (row < bLen && col >= 0 && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     row = fromPoint.row - 2;
     col = fromPoint.column + 1;
-    if (row >= 0 && col < bLen && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     row = fromPoint.row - 2;
     col = fromPoint.column - 1;
-    if (row >= 0 && col >= 0 && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     col = fromPoint.column + 2;
     row = fromPoint.row + 1;
-    if (row < bLen && col < bLen && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     col = fromPoint.column + 2;
     row = fromPoint.row - 1;
-    if (row >= 0 && col < bLen && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     col = fromPoint.column - 2;
     row = fromPoint.row + 1;
-    if (row < bLen && col >= 0 && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     col = fromPoint.column - 2;
     row = fromPoint.row - 1;
-    if (row >= 0 && col >= 0 && board[row][col] == 0) {
+    if (isValidLocation(row, col, board)) {
       validMoves.add(new Point(row, col));
     }
 
     return validMoves;
+  }
+
+  private static boolean isValidLocation(int row, int col, int[][] board) {
+    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+      return false;
+    }
+
+    if (board[row][col] != 0) {
+      return false;
+    }
+
+    return true;
   }
 
   private static void recordMove(int[][] board, Point nextMovePoint, int stepNumber) {

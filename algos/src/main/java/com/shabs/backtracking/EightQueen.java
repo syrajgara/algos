@@ -72,18 +72,20 @@ public class EightQueen {
 
   private static boolean isValidLocation(int[][] board, int row, int column) {
     for (int i = 1; i <= row; i++) {
+      int rowToCheck = row - i; // start from previous row, all the way to the first row
+
       // vertical lines
-      if (board[row - i][column] == 1) {
+      if (board[rowToCheck][column] == 1) {
         return false;
       }
 
-      // diagonal - negative slope, going upper than current location
-      if (column - i >= 0 && board[row - i][column - i] == 1) {
+      // diagonal - negative slope
+      if (column - i >= 0 && board[rowToCheck][column - i] == 1) {
         return false;
       }
 
-      // diagonal - positive slope, going upper than current location
-      if (column + i < board.length && board[row - i][column + i] == 1) {
+      // diagonal - positive slope
+      if (column + i < board.length && board[rowToCheck][column + i] == 1) {
         return false;
       }
     }

@@ -8,6 +8,9 @@ import java.util.List;
 
 /**
  * Create a sudoku board
+ *
+ * a number (1-9) cannot be repeated in the row or column or the smaller 3x3 box
+ *
  * <p>
  * start with #1 and fill it in 9 valid places, then increment and repeat with #2,
  * if no valid position to proceed, backtrack and try another valid position
