@@ -19,10 +19,10 @@ public class PalindromicLongestSubstring {
     int maxLength = Integer.MIN_VALUE;
 
     // base condition 1: stringLength=1 -- every char is palindrom of itself - mark them
+    startPosition = 0;
+    maxLength = 1;
     for (int i = 0; i < input.length(); i++) {
       isPalindrom[i][i] = true;
-      startPosition = 0;
-      maxLength = 1;
     }
 
         /*

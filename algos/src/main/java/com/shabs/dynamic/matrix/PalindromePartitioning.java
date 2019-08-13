@@ -1,20 +1,21 @@
 package com.shabs.dynamic.matrix;
 
-import org.testng.annotations.Test;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+
+import org.testng.annotations.Test;
+
 /**
- * MATRIX isPalindromAtThisPosition boolean [n] [n]
+ * MATRIX isPalindromeAtThisPosition boolean [n] [n]
  * MATRIX cost int [n] [n]
  * init - diagonal to true and 0
  *
- * Partition / Cut the given string into palindroms.
+ * Partition / Cut the given string into palindromes.
  * "abaxyx" will need to be cut into "aba" and "xyx"
  * "abaxyxmnme" is cut into "aba 1 xyx 2 mnm 3 e" - where number indicate the cuts.
  * <p>
- * if the string is a palindrom at position i and j, no cutting needed and hence cost = 0
+ * if the string is a palindrome at position i and j, no cutting needed and hence cost = 0
  * every cut will increase cost by 1.
  * <p>
  * create nxn matrix to store if a string is palindrome at that location
@@ -22,7 +23,7 @@ import static org.hamcrest.Matchers.is;
  * <p>
  * first calc a nxn matrix which marks whether string is palindrome at that location.
  * - a char is palindrome to itself so, put TRUE and cost 0 for cells where i==j
- * - now check if every 2 char string is palindrom,
+ * - now check if every 2 char string is palindrome,
  * - then every 3 char string ...
  * - so on till every n char string
  * <p>
@@ -36,53 +37,53 @@ import static org.hamcrest.Matchers.is;
 public class PalindromePartitioning {
 
   private int minCut(String input) {
-    int n = input.length();
+    int len = input.length();
 
-    boolean[][] isPalindromAtThisPosition = new boolean[n][n];
-    int[][] cost = new int[n][n];
+    boolean[][] isPalindromeAtThisPosition = new boolean[len][len];
+    int[][] cost = new int[len][len];
 
-    // fill in single char palindrom
-    for (int i = 0; i < n; i++) {
-      // single char - a char is palindrom to itself
-      isPalindromAtThisPosition[i][i] = true;
+    // fill in single char palindrome
+    for (int i = 0; i < len; i++) {
+      // single char - a char is palindrome to itself
+      isPalindromeAtThisPosition[i][i] = true;
       cost[i][i] = 0;
     }
 
-    // fill in for multiple char - starting from 2 char length to n char length
-    for (int chars = 2; chars <= n; chars++) {
+    // fill in for multiple char - starting from 2 char length to len char length
+    for (int chars = 2; chars <= len; chars++) {
       // first loop word size is going to be 2 chars,
       // keep taking 2 chars starting from 0th index
-      // all the way upto n-2 chars
-      // for 2 char string, check (0==1) (1==2) ... (n-2==n-1)
+      // all the way upto len-2 chars
+      // for 2 char string, check (0==1) (1==2) ... (len-2==len-1)
       // for 3 char string, check (0==2 and 1 palin 1) ...
       // for 4 char string, check (0==3 and 1 palin 2) ...
       // and so on
 
       // row is the start char, col is the end char
-      for (int row = 0; row <= n - chars; row++) {
-        // i is the left most char of the string we are considering
-        // j is the right most char ...
+      for (int row = 0; row <= len - chars; row++) {
+        // row is the left most char of the string we are considering
+        // col is the right most char ...
         int col = row + chars - 1;
 
         // row and col should match
-        isPalindromAtThisPosition[row][col] = (input.charAt(row) == input.charAt(col));
+        isPalindromeAtThisPosition[row][col] = (input.charAt(row) == input.charAt(col));
 
-        if (chars > 2 && isPalindromAtThisPosition[row][col]) {
+        if (chars > 2 && isPalindromeAtThisPosition[row][col]) {
           // in addition - the center string should be palindrome
           // ex: "aba" - if i`th and j`th char are same
           // and the string between them is palindrom
           // then this fragment of string is palindrom
-          isPalindromAtThisPosition[row][col] = isPalindromAtThisPosition[row + 1][col - 1];
+          isPalindromeAtThisPosition[row][col] = isPalindromeAtThisPosition[row + 1][col - 1];
         }
 
         // set costs
-        if (isPalindromAtThisPosition[row][col]) {
+        if (isPalindromeAtThisPosition[row][col]) {
           cost[row][col] = 0;
         } else {
           cost[row][col] = Integer.MAX_VALUE;
 
-          // if this fragment is not palindrom
-          // lets see if we can CUT this fragment to make multiple palindrom
+          // if this fragment is not palindrome
+          // lets see if we can CUT this fragment to make multiple palindrome
           // out of this fragment
           for (int cutAt = row; cutAt < col; cutAt++) {
             cost[row][col] = Math.min( cost[row][col],
@@ -94,8 +95,8 @@ public class PalindromePartitioning {
       printCost(input, cost);
     }
 
-    // cost on the last char is the min cuts needed to break the string into palindroms
-    return cost[0][n - 1];
+    // cost on the last char is the min cuts needed to break the string into palindromes
+    return cost[0][len - 1];
   }
 
   private void printCost(String input, int[][] cost) {

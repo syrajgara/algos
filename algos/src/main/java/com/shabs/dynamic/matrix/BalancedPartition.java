@@ -44,25 +44,25 @@ public class BalancedPartition {
     int sumOfOneSet = totalSum / 2;
     boolean[][] table = new boolean[sumOfOneSet + 1][input.length];
 
+    // INIT first row
     // all elements can get you to sum of zero - by being not part of that set
     int SUM_ZERO = 0;
     for (int index = 0; index < table[SUM_ZERO].length; index++) {
       table[SUM_ZERO][index] = true;
     }
 
+    // INIT first col
+    int firstIndex = 0;
+    int firstValueInInput = input[firstIndex];
+    table[firstValueInInput][firstIndex] = true;
+
     // loop thru all sums, see if elements can be part of that sum
     for (int sum = 1; sum < table.length; sum++) {
-      for (int index = 0; index < table[0].length; index++) {
-        // if the sum is same as current index's value
-        if (sum == input[index]) {
-          table[sum][index] = true; // WITH ONLY this index
-          continue; // we know this index is valid for this sum
-        }
+      for (int index = 1; index < table[0].length; index++) {
 
         // if previous index can make this sum,
         // than this index can also make the sum by NOT being part of that same set.
-        if (index > 0  // so as to not step out of the matrix
-            && table[sum][index - 1]) { // == true
+        if (table[sum][index - 1]) {
 
           table[sum][index] = table[sum][index - 1]; // WITH ONLY previous index
           continue;
@@ -70,8 +70,8 @@ public class BalancedPartition {
 
         // this index has to be part of this sum, iff...
         int previousSum = sum - input[index];
-        if (index > 0 && previousSum > 0 // so as to not step out of the matrix
-            && table[previousSum][index - 1]) { // == true
+        if (previousSum >= 0 // so as to not step out of the matrix
+            && table[previousSum][index - 1]) {
 
           // since previous index is true for previous sum,
           // adding current value to previous sum will also be true
@@ -121,7 +121,7 @@ public class BalancedPartition {
 
   @Test
   public void balancedPartition() {
-    int[] input = {1, 5, 11, 5};
+    int[] input = {5, 1, 11, 5};
     boolean actual = true;
 
     boolean expected = balancedPartition(input);
