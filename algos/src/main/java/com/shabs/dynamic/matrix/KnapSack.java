@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * create maxWeight[size from 0 to knapsackSize][num of items (weight)]
+ * create maxWeight[size from 0 to knapsackSize][num of items]
  * with data in this matrix being max weight for that size and upto that item.
  *
  * maxWeight[s][i] = max(maxWeight[s][i - 1], currWeight + maxWeight[s - currSize][i - 1])
@@ -18,26 +18,25 @@ import java.util.List;
  */
 public class KnapSack {
 
-  private int knapsack(List<Item> items, int knapsackSize, int i) {
-    // row => weights
-    // col => item size
-    // data => weight
-
-    // zero size, psuedo item with weight and size zero
-    // weight[i][0] = 0; // column zero always 0
+  private int knapsack(List<Item> items, int knapsackSize) {
+    // row zero is size=0
     // weight[0][j] = 0; // row zero always 0
+
+    // col zero is a dummy item with weight and size zero
+    // weight[i][0] = 0; // column zero always 0
+
     int[][] values = new int[knapsackSize + 1][items.size() + 1];
 
     // row = size, col = item, data = weight
     for (int row = 1; row < values.length; row++) {
       for (int col = 1; col < values[0].length; col++) {
         int valueWithoutUsingItem = values[row][col - 1];
+
+        int itemIndex = col - 1; // we have dummy item at the start, needing this offset
+        Item currItem = items.get(itemIndex);
         int valueWithUsingItem = 0;
 
-        int itemIndex = col - 1;
-        Item currItem = items.get(itemIndex);
-
-        if (col - 1 >= 0 && row - currItem.size >= 0) {
+        if (row - currItem.size >= 0) {
           valueWithUsingItem = currItem.weight + values[row - currItem.size][col - 1];
         }
 
@@ -69,7 +68,7 @@ public class KnapSack {
     items.add(new Item(2, 1));
 
     int expected = 8;
-    int actual = knapsack(items, knapsackSize, 0);
+    int actual = knapsack(items, knapsackSize);
 
     Assert.assertEquals(actual, expected);
   }

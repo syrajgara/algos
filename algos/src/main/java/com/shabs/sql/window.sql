@@ -12,15 +12,15 @@ just the current row of the query result.
 -- without ORDER, considers all rows in the partition for SUM
 SELECT duration_seconds,
        SUM(duration_seconds) OVER () AS total_seconds
-  FROM tutorial.dc_bikeshare_q1_2012
+  FROM tutorial.dc_bikeshare_q1_2012;
 
 -- use ORDER, to consider only previous rows in the partition
 SELECT duration_seconds,
        SUM(duration_seconds) OVER (ORDER BY start_time) AS running_total
-  FROM tutorial.dc_bikeshare_q1_2012
+  FROM tutorial.dc_bikeshare_q1_2012;
 
 SELECT start_terminal,
        duration_seconds,
        SUM(duration_seconds) OVER (PARTITION BY start_terminal ORDER BY start_time) AS running_total
   FROM tutorial.dc_bikeshare_q1_2012
- WHERE start_time < '2012-01-08'
+ WHERE start_time < '2012-01-08';

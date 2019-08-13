@@ -93,12 +93,15 @@ DROP INDEX - deletes an index
 
 
 * WINDOW FUNCTION
-A window function performs a calculation across a set of table rows that are somehow related to the current row.
-This is comparable to the type of calculation that can be done with an aggregate function. 
-But unlike regular aggregate functions, use of a window function does not cause rows to become grouped 
-into a single output row — the rows retain their separate identities. 
-Behind the scenes, the window function is able to access more than just the current row of the query result.
+- A window function performs a calculation across a set of table rows that are somehow related to the current row.
+- This is comparable to the type of calculation that can be done with an aggregate function. 
+- But unlike regular aggregate functions, use of a window function does not cause rows to become grouped into a single output row
+  — the rows retain their separate identities. 
+- Behind the scenes, the window function is able to access more than just the current row of the query result.
 
-Truncate vs Delete - no rollback vs rollback before commit, truncate frees the space
 
-NVL(value, defaultValue)
+* Truncate vs Delete
+- no rollback vs rollback before commit, truncate frees the space
+
+
+* NVL(value, defaultValue)

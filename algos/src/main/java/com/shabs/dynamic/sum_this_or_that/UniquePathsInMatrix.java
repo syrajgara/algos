@@ -29,41 +29,59 @@ public class UniquePathsInMatrix {
       return 1;
     }
 
-    if (doMemoize && memoize[currentRow][currentCol] == 0) {
-      memoize[currentRow][currentCol] =
-            findPaths(currentRow + 1, currentCol, endRow, endCol, memoize, doMemoize)
-          + findPaths(currentRow, currentCol + 1, endRow, endCol, memoize, doMemoize);
-    }
-
     if (!doMemoize) {
       return findPaths(currentRow + 1, currentCol, endRow, endCol, memoize, doMemoize)
           + findPaths(currentRow, currentCol + 1, endRow, endCol, memoize, doMemoize);
     }
 
+    if (doMemoize && memoize[currentRow][currentCol] == 0) {
+      memoize[currentRow][currentCol] =
+            findPaths(currentRow + 1, currentCol, endRow, endCol, memoize, doMemoize)
+          + findPaths(currentRow, currentCol + 1, endRow, endCol, memoize, doMemoize);
+    }
     return memoize[currentRow][currentCol];
+  }
+
+  private void print(int[][] memoize) {
+    for (int row = 0; row < memoize.length; row++) {
+      for (int col = 0; col < memoize[0].length; col++) {
+        System.out.print(memoize[row][col] + ",");
+      }
+      System.out.println();
+    }
+
   }
 
   @Test
   public void test() {
     int expected = 2;
-    int actual = findPaths(0, 0, 1, 1, new int[2][2], false);
+    int[][] memoize = new int[2][2];
+
+    int actual = findPaths(0, 0, 1, 1, memoize, false);
     Assert.assertEquals(actual, expected);
   }
 
   @Test
   public void test2() {
     int expected = 6;
-    int actual = findPaths(0, 0, 2, 2, new int[3][3], true);
+    int[][] memoize = new int[3][3];
+
+    int actual = findPaths(0, 0, 2, 2, memoize, true);
     Assert.assertEquals(actual, expected);
+    print(memoize);
   }
 
   @Test
   public void test3() {
-    int expected = 985525432;
+    int expected = 40116600;
+
+    // overflows after 16
+    int[][] memoize = new int[15][15];
 
     // will not work if doMemoize=false
 
-    int actual = findPaths(0, 0, 19, 19, new int[20][20], true);
+    int actual = findPaths(0, 0, 14, 14, memoize, true);
     Assert.assertEquals(actual, expected);
+    print(memoize);
   }
 }

@@ -1,4 +1,4 @@
-package com.shabs.design;
+package com.shabs.iteration;
 
 import org.apache.commons.lang.StringUtils;
 import org.testng.Assert;

@@ -15,7 +15,7 @@ public class GreedyCoin {
     int coins;
 
     coins = (totalAmount / 25)
-        + ((totalAmount % 25) / 10)
+         + ((totalAmount % 25) / 10)
         + (((totalAmount % 25) % 10) / 5)
         + (((totalAmount % 25) % 10) % 5);
 

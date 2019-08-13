@@ -36,6 +36,7 @@ public class DecodeWays {
     if (previousChar.isEmpty()) {
       // option #1: use currentChar
       if (isValidChar(currentChar)) {
+        // 0 is not valid char - valid is 1-26
         count = countWays(encoded, currentIndex + 1, "");
       }
 

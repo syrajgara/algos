@@ -5,6 +5,11 @@ import org.testng.annotations.Test;
 
 /**
  * https://leetcode.com/problems/missing-number/#/solutions
+ *
+ * A ^ A = 0 --- so (index ^ number) to cancel out the numbers with its index,
+ * you will end up with index value that didnt have corresponding number
+ *
+ *
  * <p>
  * - assumption, in an array with index 0 - n ... the values are between 0 and n+1
  * - with one of the numbers missing
@@ -17,6 +22,7 @@ import org.testng.annotations.Test;
  */
 public class FindMissingIntegerUsingXor {
 
+  // assume numbers start with 0 -- since index starts at 0
   public int find(int[] input) {
     int xor = 0;
 
@@ -26,7 +32,7 @@ public class FindMissingIntegerUsingXor {
 
     if (xor == 0) {
       // nothing missing
-      return xor;
+      return 0;
     }
 
     // at this point, one number is missing and the last index is missing

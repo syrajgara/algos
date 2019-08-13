@@ -13,7 +13,7 @@ import java.util.Set;
  * <p>
  * - count frequency of characters
  * - create BinaryTree for each char with node having the char and frequency of that char
- * - put these in priority queue
+ * - put these in priority queue (minimum char frequency)
  * - and then loop and pick 2 trees from the queue merge (with least frequencies) and insert it back
  * - keep doing till you have only one tree left -- this is the Trie that will help compress the message.
  */
@@ -31,10 +31,10 @@ public class HuffmanCode {
     createExpressionDictionary(frequencies.keySet(), compressionTree, charToExpressionDictionary, expressionToCharDictionary);
 
     String encodedMessage = encode(message, charToExpressionDictionary);
-    System.out.println("Encoded:" + encodedMessage);
+    System.out.println("\nEncoded:" + encodedMessage);
 
     String decodedMessage = decode(encodedMessage, expressionToCharDictionary);
-    System.out.println("Decoded:" + decodedMessage);
+    System.out.println("\nDecoded:" + decodedMessage);
 
     return decodedMessage;
   }
@@ -48,6 +48,7 @@ public class HuffmanCode {
       frequencies.put(messageChar, frequencies.getOrDefault(messageChar, 0) + 1);
     }
 
+    System.out.println("Frequencies: ");
     for (Map.Entry e : frequencies.entrySet()) {
       System.out.println(e.getKey() + "=>" + e.getValue());
     }
@@ -68,6 +69,7 @@ public class HuffmanCode {
       priorityQueue.add(rootBinaryTree);
     }
 
+    System.out.println("\nCompression Tree: ");
     while (priorityQueue.size() != 1) {
       BinaryTree tree1 = priorityQueue.remove();
       BinaryTree tree2 = priorityQueue.remove();
@@ -85,6 +87,7 @@ public class HuffmanCode {
   }
 
   private static void createExpressionDictionary(Set<String> chars, BinaryTree compressionTree, Map<String, String> charToExpressionDictionary, Map<String, String> expressionToCharDictionary) {
+    System.out.println();
     for (String key : chars) {
       String expression = compressionTree.findExpression(key, "");
       System.out.println("Compression for " + key + "=>" + expression);
@@ -99,6 +102,7 @@ public class HuffmanCode {
 
     for (int i = 0; i < message.length(); i++) {
       String stringChar = String.valueOf(message.charAt(i));
+
       buffer.append(charToExpressionDictionary.get(stringChar));
       buffer.append(CODE_SEPARATOR);
     }
@@ -149,11 +153,11 @@ public class HuffmanCode {
 
     @Override
     public String toString() {
-      String left, right = "";
+      String left, right;
       left = leftTree != null ? leftTree.root.data : "";
       right = rightTree != null ? rightTree.root.data : "";
 
-      return root.data + "=>" + root.frequency + "(" + left + ", " + right + ")";
+      return "[" + root.data + " => " + root.frequency + "=(" + left + "," + right + ")]";
     }
 
     @Override

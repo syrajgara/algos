@@ -1,4 +1,4 @@
-package com.shabs.design;
+package com.shabs.iteration;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

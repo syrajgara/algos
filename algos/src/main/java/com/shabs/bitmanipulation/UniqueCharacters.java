@@ -6,30 +6,28 @@ import org.testng.annotations.Test;
 /**
  * find if string has unique characters
  * - keep an array of boolean one per char
- * - use bit manipulation 1<<val
+ * - use bit manipulation (1 << val)
  */
 public class UniqueCharacters {
   public static boolean isUniqueUsingBit(String text) {
     // assumption: text contains chars from a-z only.
-    boolean isUnique = true;
 
     int bitMapForCharsInText = 0;
 
-    for (int i = 0; i < text.length(); i++) {
-      char textChar = text.charAt(i);
+    for (char textChar : text.toCharArray()) {
       int textCharInt = textChar - 'a';
 
       // result is not 1 .. but depends on the which bit is 1 .. so check with != 0
       if ((bitMapForCharsInText & (1 << textCharInt)) != 0) {
         // this means we have already marked current character in the bitmap,
         // this is the 2nd time we saw it.
-        isUnique = false;
-        break;
+        return false;
       }
+
       bitMapForCharsInText |= (1 << textCharInt);
     }
 
-    return isUnique;
+    return true;
   }
 
   public static boolean isUniqueAscii(String text) {
@@ -38,21 +36,21 @@ public class UniqueCharacters {
     }
 
     // assumption: text contains ascii chars (int value 0 - 255).
-    boolean isUnique = true;
 
     int extendedAsciiCharSetSize = 256;
     boolean[] uniqueness = new boolean[extendedAsciiCharSetSize];
 
-    for (int i = 0; i < text.length(); i++) {
-      int charIntValue = text.charAt(i);
+    for (char textChar : text.toCharArray()) {
+      int charIntValue = textChar;
+
       if (uniqueness[charIntValue]) {
-        isUnique = false;
-        break;
+        return false;
       }
+
       uniqueness[charIntValue] = true;
     }
 
-    return isUnique;
+    return true;
   }
 
   @Test

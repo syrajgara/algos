@@ -12,7 +12,9 @@ import java.util.List;
  * optimize the value in the sack
  *
  * Cannot MEMOIZE - on sackSize, since it also depends on what is in the list of iterms at a particular time
- * <p>
+ *
+ * sort by increasing size, so that you can short circuit, when you are not able to fit an item in the sack.
+ *
  * limited sack size, take each item from list - either use it or throw it
  * if using increase value, but reduce sack size
  * if not using, no change in value or sack size

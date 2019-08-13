@@ -30,7 +30,7 @@ public class BitMovement {
 
   @Test void bitRightUnSigned() {
     int expected = 1073741823;
-    // -4 in binary 1111 1111 1111 1111 1111 1111 1111 1100
+    // -4 in binary   1111 1111 1111 1111 1111 1111 1111 1100
     // logical unsigned -- add zeros on the left
     // unsigned shift 0011 1111 1111 1111 1111 1111 1111 1111
     int actual = (-4 >>> 2);
@@ -47,8 +47,10 @@ public class BitMovement {
     Assert.assertEquals(1 << x , 2);
 
     x = 3;
-    Assert.assertEquals(1 << x , 8);
+    Assert.assertEquals(1 << x , 4);
 
+    x = 4;
+    Assert.assertEquals(1 << x , 8);
   }
 
   @Test void isPowerOf2() {

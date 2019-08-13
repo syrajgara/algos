@@ -19,6 +19,17 @@ import java.util.List;
  */
 public class ActivitySchedulingIntervalSelection {
 
+  private enum State {
+    PICK("Picking "),
+    SKIP("Skipping");
+
+    private String text;
+
+    State(String text) {
+      this.text = text;
+    }
+  }
+
   private class Interval implements Comparable<Interval> {
     public Integer start;
     public Integer end;
@@ -28,8 +39,8 @@ public class ActivitySchedulingIntervalSelection {
       end = e;
     }
 
-    public void print() {
-      System.out.println("[" + start + ", " + end + "]");
+    public void print(State state) {
+      System.out.println(state.text + " : [" + start + ", " + end + "]");
     }
 
     @Override
@@ -47,9 +58,11 @@ public class ActivitySchedulingIntervalSelection {
     for (Interval i : intervals) {
       if (i.start >= previousEnd) {
         // we will use this interval
-        i.print();
+        i.print(State.PICK);
         countValidIntervals++;
         previousEnd = i.end;
+      } else {
+        i.print(State.SKIP);
       }
     }
 

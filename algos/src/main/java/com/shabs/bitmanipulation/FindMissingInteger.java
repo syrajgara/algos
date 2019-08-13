@@ -38,6 +38,9 @@ public class FindMissingInteger {
 
   @Test
   public void find() {
+    // assuming data starts at 0
+    // if it starts from 1, we will have to substract 1 from all numbers
+    // to make sure 32 fits in row 1, 32nd bit
     int[] data = {0, 1, 2, 3, 4, 5, 6, 7, /* 8, */ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
     int expected = 8;
 

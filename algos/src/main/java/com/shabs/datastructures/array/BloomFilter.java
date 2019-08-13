@@ -1,4 +1,4 @@
-package com.shabs.design;
+package com.shabs.datastructures.array;
 
 /**
  * Data Structure which can tell you if an element

@@ -11,14 +11,14 @@ import java.util.List;
  * <p>
  * if inputs = [1,2,3]
  * outputs = [
- * [3],
- * [1],
- * [2],
- * [1,2,3],
- * [1,3],
- * [2,3],
- * [1,2],
- * []
+ * set =>
+ * set => 1,
+ * set => 1, 2,
+ * set => 1, 2, 3,
+ * set => 1, 3,
+ * set => 2,
+ * set => 2, 3,
+ * set => 3,
  * ]
  * <p>
  * - take one element, recurse thru the others

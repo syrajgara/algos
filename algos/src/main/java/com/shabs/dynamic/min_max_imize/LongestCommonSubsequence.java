@@ -17,19 +17,21 @@ import org.testng.annotations.Test;
  * iterative approach will need to maintain a matrix of previous calculations.
  */
 public class LongestCommonSubsequence {
-  public static int lcsRecurssive(char[] A, int a, char[] B, int b) {
+  public static int lcsRecurssive(char[] A, int indexA, char[] B, int indexB) {
     int len;
 
-    if (a == -1 || b == -1) {
-      // reached the end
-      //System.out.println("Index OUT: a=" + a + " b=" + b);
+    if (indexA == -1 || indexB == -1) {
+      // reached the end of one or both strings
+      //System.out.println("Index OUT: indexA=" + indexA + " indexB=" + indexB);
       len = 0;
-    } else if (A[a] == B[b]) {
-      //System.out.println("Index EQUAL: a=" + a + " b=" + b);
-      len = 1 + lcsRecurssive(A, a - 1, B, b - 1);
+    } else if (A[indexA] == B[indexB]) {
+      //System.out.println("Index EQUAL: indexA=" + indexA + " indexB=" + indexB);
+      len = 1 + lcsRecurssive(A, indexA - 1, B, indexB - 1);
     } else {
-      //System.out.println("Index MISMATCH: a=" + a + " b=" + b);
-      len = Math.max(lcsRecurssive(A, a - 1, B, b), lcsRecurssive(A, a, B, b - 1));
+      //System.out.println("Index MISMATCH: indexA=" + indexA + " indexB=" + indexB);
+      len = Math.max(lcsRecurssive(A, indexA - 1, B, indexB),
+                     lcsRecurssive(A, indexA, B, indexB - 1));
+                     // no need for 3rd option of reducing both indexes by 1, since that will get covered in next recursive call
     }
 
     return len;

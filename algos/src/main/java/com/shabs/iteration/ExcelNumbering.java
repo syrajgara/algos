@@ -1,4 +1,4 @@
-package com.shabs.design;
+package com.shabs.iteration;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -29,7 +29,7 @@ public class ExcelNumbering {
       input /= 26;
     }
 
-    return output.toString();
+    return output;
   }
 
   @Test
@@ -70,7 +70,7 @@ public class ExcelNumbering {
 
   @Test
   public void test5() {
-    String input = "ABCDEFG"; // maximum before overflow of the int
+    String input = "BA";
     int actual = encode(input);
     System.out.println(input + " = " + actual);
     String output = decode(actual);
@@ -79,6 +79,24 @@ public class ExcelNumbering {
 
   @Test
   public void test6() {
+    String input = "BB";
+    int actual = encode(input);
+    System.out.println(input + " = " + actual);
+    String output = decode(actual);
+    Assert.assertEquals(output, input);
+  }
+
+  @Test
+  public void test7() {
+    String input = "ABCDEFG"; // maximum before overflow of the int
+    int actual = encode(input);
+    System.out.println(input + " = " + actual);
+    String output = decode(actual);
+    Assert.assertEquals(output, input);
+  }
+
+  @Test
+  public void test8() {
     String input = "ZZZZZ"; // maximum before overflow of the int
     int actual = encode(input);
     System.out.println(input + " = " + actual);
