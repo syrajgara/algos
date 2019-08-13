@@ -1,4 +1,4 @@
-package com.shabs.zUnimplemented.impl;
+package com.shabs.zUnimplemented;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

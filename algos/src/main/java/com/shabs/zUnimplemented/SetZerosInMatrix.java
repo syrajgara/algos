@@ -1,4 +1,4 @@
-package com.shabs.zUnimplemented.impl;
+package com.shabs.zUnimplemented;
 
 /**
  * Zero out a column or row if there is zero in that column or row.

@@ -1,4 +1,4 @@
-package com.shabs.zUnimplemented.impl;
+package com.shabs.zUnimplemented;
 
 public class MedianOfMedian {
 
