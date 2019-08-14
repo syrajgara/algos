@@ -23,12 +23,12 @@ public class LongestIncreasingPathInAMatrixIterative {
   private int findPaths(int[][] input) {
     int overallMaxLength = 0;
 
-    int[][] paths = new int[input.length][input[0].length];
+    int[][] pathLength = new int[input.length][input[0].length];
 
     for (int row = 0; row < input.length; row++) {
       for (int col = 0; col < input[0].length; col++) {
-        calcPaths(input, paths, row, col);
-        overallMaxLength = Math.max(overallMaxLength, paths[row][col]);
+        calcPaths(input, pathLength, row, col);
+        overallMaxLength = Math.max(overallMaxLength, pathLength[row][col]);
       }
     }
 
@@ -47,8 +47,8 @@ public class LongestIncreasingPathInAMatrixIterative {
     }
   }
 
-  private void calcPaths(int[][] input, int[][] paths, int row, int col) {
-    if (paths[row][col] != 0) {
+  private void calcPaths(int[][] input, int[][] pathLength, int row, int col) {
+    if (pathLength[row][col] != 0) {
       return;
     }
 
@@ -58,41 +58,42 @@ public class LongestIncreasingPathInAMatrixIterative {
     while (!queue.isEmpty()) {
       Node<Cell> node = queue.dequeue();
       Cell currCell = node.getData();
-      paths[row][col] = Math.max(paths[row][col], currCell.len);
+      int currCellValue = input[currCell.row][currCell.col];
 
-      int alreadyCalcLen;
-      alreadyCalcLen = enqueue(input, input[currCell.row][currCell.col], paths, currCell.row+1, currCell.col, currCell.len, queue);
-      paths[row][col] = Math.max(paths[row][col], alreadyCalcLen);
+      // possibly increase the pathLength for the input cell
+      int alreadyCalcLen = currCell.len;
+      pathLength[row][col] = Math.max(pathLength[row][col], alreadyCalcLen);
 
-      alreadyCalcLen = enqueue(input, input[currCell.row][currCell.col], paths, currCell.row-1, currCell.col, currCell.len, queue);
-      paths[row][col] = Math.max(paths[row][col], alreadyCalcLen);
+      alreadyCalcLen = enqueue(input, pathLength, currCell.row+1, currCell.col, currCellValue, currCell.len, queue);
+      pathLength[row][col] = Math.max(pathLength[row][col], alreadyCalcLen);
 
-      alreadyCalcLen = enqueue(input, input[currCell.row][currCell.col], paths, currCell.row, currCell.col+1, currCell.len, queue);
-      paths[row][col] = Math.max(paths[row][col], alreadyCalcLen);
+      alreadyCalcLen = enqueue(input, pathLength, currCell.row-1, currCell.col, currCellValue, currCell.len, queue);
+      pathLength[row][col] = Math.max(pathLength[row][col], alreadyCalcLen);
 
-      alreadyCalcLen = enqueue(input, input[currCell.row][currCell.col], paths, currCell.row, currCell.col-1, currCell.len, queue);
-      paths[row][col] = Math.max(paths[row][col], alreadyCalcLen);
+      alreadyCalcLen = enqueue(input, pathLength, currCell.row, currCell.col+1, currCellValue, currCell.len, queue);
+      pathLength[row][col] = Math.max(pathLength[row][col], alreadyCalcLen);
+
+      alreadyCalcLen = enqueue(input, pathLength, currCell.row, currCell.col-1, currCellValue, currCell.len, queue);
+      pathLength[row][col] = Math.max(pathLength[row][col], alreadyCalcLen);
     }
   }
 
-  private int enqueue(int[][] input, int prevValue, int[][] paths, int row, int col, int newLen, Queue<Cell> queue) {
-    int alreadyCalcLen = 0;
-
+  private int enqueue(int[][] input, int[][] pathLength, int row, int col, int prevValue, int newLen, Queue<Cell> queue) {
     if (row < 0 || row >= input.length || col < 0 || col >= input[0].length) {
-      return alreadyCalcLen;
+      return 0;
     }
 
     if (input[row][col] <= prevValue) {
-      return alreadyCalcLen;
+      return 0;
     }
 
-    if (paths[row][col] != 0) {
-      return paths[row][col];
+    if (pathLength[row][col] != 0) {
+      return pathLength[row][col];
     }
 
     queue.enqueue(new Cell(row, col, newLen + 1));
 
-    return alreadyCalcLen;
+    return 0; // we just enqueued it, will know value later, for now return 0 to ignore
   }
 
   // @Test - error due to duplicate values

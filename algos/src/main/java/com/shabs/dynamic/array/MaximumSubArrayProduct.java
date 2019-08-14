@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
  * <p>
  * loop thru the elements, with every element do a product with previous product.
  * save the max and min values of this calculation.
+ *
  * reason for min (negative) value is since a new negative number
  * could make the product positive and bigger than just doing a product with previous max
  */

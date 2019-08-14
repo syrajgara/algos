@@ -12,35 +12,32 @@ import org.testng.annotations.Test;
 public class SquareLooser {
 
   public boolean canYouWinWith(int n) {
-    boolean[] winArray = new boolean[n+1];
-    winArray[0] = true;
+    boolean[] winArrayMemoized = new boolean[n+1];
 
-    for (int i = 1; i <= n; i++ ) {
-      int sqrt = (int) Math.sqrt(i);
+    winArrayMemoized[0] = true;
 
-      if (i - Math.pow(sqrt, 2) == 0) {
+    for (int numToCheckWin = 1; numToCheckWin <= n; numToCheckWin++ ) {
+      int sqrt = (int) Math.sqrt(numToCheckWin);
+
+      if (numToCheckWin - Math.pow(sqrt, 2) == 0) {
         // this number is perfect square - so it wins
-        winArray[i] = true;
-      } else {
-        // now need to subtract perfect square and see if one of the balance is a looser,
-        // if yes, than this number is winner
-        for (int j = 1; j <= sqrt; j++) {
-          int numberAtNextPlayersTurn = i - j*j;
-          if (numberAtNextPlayersTurn > i) {
-            // we didnt find any looser on next turn,
-            // and the subtract of perfect square will take us in negative, so break
-            continue;
-          }
+        winArrayMemoized[numToCheckWin] = true;
+        continue;
+      }
 
-          if (!winArray[numberAtNextPlayersTurn]) {
-            winArray[i] = true;
-            continue;
-          }
+      // now need to subtract all perfect squares and see if one of the balance is a looser,
+      // if yes, than this number is winner
+      for (int numToPlay = 1; numToPlay <= sqrt; numToPlay++) {
+        int numberAtNextPlayersTurn = numToCheckWin - numToPlay * numToPlay;
+
+        if ( ! winArrayMemoized[numberAtNextPlayersTurn] ) { // next number will loose
+          winArrayMemoized[numToCheckWin] = true; // this number will win
+          continue; // have to find one numToCheckWin, which will allow us to win. If found we can continue.
         }
       }
     }
 
-    return winArray[n];
+    return winArrayMemoized[n];
   }
 
   @Test public void testPefectSquaresUnder22() {

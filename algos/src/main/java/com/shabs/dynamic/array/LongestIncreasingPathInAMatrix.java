@@ -20,11 +20,11 @@ public class LongestIncreasingPathInAMatrix {
 
   private int findPaths(int[][] input) {
     int overallMaxLength = 0;
-    int[][] paths = new int[input.length][input[0].length];
+    int[][] pathLength = new int[input.length][input[0].length];
 
     for (int row = 0; row < input.length; row++) {
       for (int col = 0; col < input[0].length; col++) {
-        int maxLengthFromCurrent = calcPaths(input, paths, row, col, Integer.MIN_VALUE);
+        int maxLengthFromCurrent = calcPaths(input, pathLength, row, col, Integer.MIN_VALUE);
         overallMaxLength = Math.max(overallMaxLength, maxLengthFromCurrent);
       }
     }
@@ -32,7 +32,7 @@ public class LongestIncreasingPathInAMatrix {
     return overallMaxLength;
   }
 
-  private int calcPaths(int[][] input, int[][] paths, int row, int col, int previousValue) {
+  private int calcPaths(int[][] input, int[][] pathLength, int row, int col, int previousValue) {
     if (row < 0 || row >= input.length || col < 0 || col >= input[0].length) {
       return 0; // stepping out of bound
     }
@@ -42,21 +42,21 @@ public class LongestIncreasingPathInAMatrix {
       return 0; // this element is not increasing
     }
 
-    if (paths[row][col] != 0) {
-      return paths[row][col]; // we have already calculated it
+    if (pathLength[row][col] != 0) {
+      return pathLength[row][col]; // we have already calculated it
     }
 
-    int pathLeft = calcPaths(input, paths, row, col-1, currentValue);
-    int pathRight = calcPaths(input, paths, row, col+1, currentValue);
-    int pathUp = calcPaths(input, paths, row-1, col, currentValue);
-    int pathDown = calcPaths(input, paths, row+1, col, currentValue);
+    int pathLeft = calcPaths(input, pathLength, row, col-1, currentValue);
+    int pathRight = calcPaths(input, pathLength, row, col+1, currentValue);
+    int pathUp = calcPaths(input, pathLength, row-1, col, currentValue);
+    int pathDown = calcPaths(input, pathLength, row+1, col, currentValue);
 
-    paths[row][col] = 1 + Math.max(Math.max(Math.max(pathLeft,
+    pathLength[row][col] = 1 + Math.max(Math.max(Math.max(pathLeft,
                                                      pathRight),
                                                      pathUp),
                                                      pathDown);
 
-    return paths[row][col];
+    return pathLength[row][col];
   }
 
   @Test

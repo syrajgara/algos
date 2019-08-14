@@ -16,7 +16,7 @@ public class MaximumSubArraySum {
 
     for (int i = 1; i < input.length; i++) {
       // we have to keep input[i], with or without the previousSum
-      // if previousSum is -ve ignore it,
+      // if previousSum is -ve ignore it, (previousSum + input[i] < input[i])
       // start from current input - which could be negative, dont zero it out
       previousSum = Math.max(previousSum + input[i], input[i]);
 

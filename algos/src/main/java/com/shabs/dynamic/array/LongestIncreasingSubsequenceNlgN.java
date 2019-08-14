@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Find the length of longest increasing non-contiguous sub-sequence
  * <p>
- * input unsorted array = [10, 9, 2, 5, 3, 7, 101, 18]
+ * input unsorted array = [10, 9, 2, 5, 3, 7, 101, 18, 6, 15]
  *   one of the solution = 4 => [2, 3, 7, 101]
  *   - there could be multiple solution,
  *   - just need to return the number, not the actual sequence
@@ -19,8 +19,8 @@ import java.util.Arrays;
  * since previous larger element is no good for increasing subsequence
  * index0 => 10 replace by 9 replace by 2
  * index1 => 5 replace by 3
- * index2 => 7
- * index3 => 101 replace by 18
+ * index2 => 7 replace by 6
+ * index3 => 101 replace by 18 replace by 15
  * index4 => not used
  *
  * index4 => 4 length of LIS
@@ -63,7 +63,7 @@ public class LongestIncreasingSubsequenceNlgN {
 
   @Test
   public void test2() {
-    int[] input = {10, 9, 2, 5, 3, 7, 101, 18};
+    int[] input = {10, 9, 2, 5, 3, 7, 101, 18, 6, 15};
 
     int expected = 4;
     int actual = findLengthLCS_NlogN(input);

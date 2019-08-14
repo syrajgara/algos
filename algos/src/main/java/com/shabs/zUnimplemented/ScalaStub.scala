@@ -1,6 +1,7 @@
-package com.shabs.design
+package com.shabs.zUnimplemented
 
 import scala.io.Source
+
 object ScalaStub {
 
   def main(args: Array[String]): Unit = {

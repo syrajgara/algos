@@ -1,4 +1,4 @@
-package com.shabs.design;
+package com.shabs.zUnimplemented.design;
 
 /**
  * Design a chat system, clients, chat server, define what protocols needed, how to communicate.

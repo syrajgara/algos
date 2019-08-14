@@ -1,4 +1,4 @@
-package com.shabs.design;
+package com.shabs.zUnimplemented.design;
 
 /**
  * Using an enum! : (The simplest way to define a singleton! And guess what! Enums are lazily initialized
