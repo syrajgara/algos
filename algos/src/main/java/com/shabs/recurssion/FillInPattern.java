@@ -9,6 +9,10 @@ import java.util.List;
  * give a pattern "*a**"
  * for every * in the pattern, fill in {0,1}
  *
+ * Start building from the last char
+ *
+ * if building from first char, O(m^n) - where m is number of fillers, n is length of pattern
+ *
  * input: "*a**" and {0,1}
  * ouput: {"0a00", "0a01", "0a10", "0a11", ... }
  */

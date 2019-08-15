@@ -24,8 +24,16 @@ public class ExcelNumbering {
     String output = "";
 
     while (input != 0) {
-      input--; // this makes Z=25, A=0, AA=26 etc ... basically one less than encode
+      // without shifting every number down by 1, A will be 1 and Z will be zero
+      // with shifting, A will be 0 and Z will be 25
+      // and AA will be 26
+      input--;
+
+      // due to the modulus, we will get char from the R to L
+      // so the newly created (modulus) char will be left of the previous output
       output = (char) ('A' + (input % 26)) + output;
+
+      // remove data for this char, and redo loop with balance number, to find the next (previous) char
       input /= 26;
     }
 

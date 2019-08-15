@@ -1,11 +1,10 @@
 package com.shabs.iteration;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * convert a given URL to http://tinyurl.com/{6 chars}

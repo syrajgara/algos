@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
  * <p>
  * Give a number n - determine if the number is Happy
  * A number is happy if
- * - you do sum(square(individual digits of the number)) and after someiteration the result is 1.
+ * - you do sum(square(individual digits of the number)) and after some iteration the result is 1.
  * - not happy - if you run into a loop, where you never reach 1
  * <p>
  * - function to get sum of squares of individual digits
@@ -34,7 +34,7 @@ public class HappyNumber {
       }
     } while (fastSum != slowSum);
 
-    return (fastSum == 1);
+    return false;
   }
 
   private int getSumOfSquareOfDigits(int n) {
