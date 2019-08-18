@@ -1,4 +1,4 @@
-package com.shabs.datastructures.array;
+package com.shabs.datastructures.search;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

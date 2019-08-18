@@ -13,6 +13,11 @@ import java.util.Arrays;
  * - Sort array
  * - for each element
  * - do two sum on the rest to get the sum equal to the element
+ *
+ * {-5, ... , -2, m, ..., 7, ..., n}
+ * when testing for -5, we would have found {-2, 7},'
+ * so when testing -2, no need to test {-5 ... 7},
+ * just need to test {m ... n}
  */
 public class SumThree {
 

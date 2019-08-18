@@ -1,8 +1,5 @@
 package com.shabs.sort;
 
-/**
- * Created  on 6/6/14.
- */
 public class SelectionSort {
   public static int[] input = {4, 1, 2, 8, 3, 7, 5, 9};
 
@@ -21,7 +18,6 @@ public class SelectionSort {
         input[i] = input[minIndex];
         input[minIndex] = temp;
       }
-
     }
 
     return input;

@@ -10,9 +10,9 @@ package com.shabs.datastructures.array;
 
  What is the minimum candies you must give?
 
- ratings => {2, 1,  3,   5, 6, 2, 1}
- candy   => {1, 1-1=0, 1, 2, 3, 1, 0}
- fix candy   => {2, 1, 2, 3, 4, 2, 1}
+ ratings   => {2, 1, 3, 5, 6, 2, 1}
+ candy     => {1, 0, 1, 2, 3, 1, 0}
+ fix candy => {2, 1, 2, 3, 4, 2, 1}
 
  */
 public class CandyDistribution {
@@ -27,6 +27,8 @@ public class CandyDistribution {
     for (int i=1; i<ratings.length; i++) {
       if (ratings[i] < ratings[i-1]) {
         candies[i] = candies[i-1] - 1;
+
+        // drop all the way to 1
         if (candies[i] > 1) {
           candies[i] = 1;
         }

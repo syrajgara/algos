@@ -39,7 +39,7 @@ public class Celebrity {
     // so far we confirmed that assumedCelebrity doesnt know anyone
     // need to confirm if everyone knows him
 
-    for (int i = 1; i < numberOfPeople; i++) {
+    for (int i = 0; i < numberOfPeople; i++) {
       if (i == assumedCelebrity) {
         continue;
       }
