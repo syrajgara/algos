@@ -14,6 +14,7 @@ import java.util.Map;
  * Given "abcabcbb", the answer is "abc", which the length is 3.
  * Given "bbbbb", the answer is "b", with the length of 1.
  * Given "pwwkew", the answer is "wke", with the length of 3.
+ *
  * Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  * <p>
  * https://leetcode.com/problems/longest-substring-without-repeating-characters/?tab=Description
@@ -27,7 +28,7 @@ import java.util.Map;
  * - use the index from the map to move a LowPointer and reset the char's index in the Map
  * - if new char, put in Map the char and its index
  */
-public class LongestSubstringWithRepeatingCharacters_ZeroTimes {
+public class LongestSubstringWithoutRepeatingCharacters {
 
   private String find(String input) {
     String output = "";

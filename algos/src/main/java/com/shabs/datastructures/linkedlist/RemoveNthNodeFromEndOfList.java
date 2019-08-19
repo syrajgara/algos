@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 /**
  * 2 Pointers
  * <p>
- * run first nFromEnd steps
+ * run first pointer n steps
  * run first and second together - till next of first is null
- * re-link next of the second, to skip the nFromEnd element.
+ * re-link next of the second, to skip the nth element from the end.
  */
 public class RemoveNthNodeFromEndOfList {
 

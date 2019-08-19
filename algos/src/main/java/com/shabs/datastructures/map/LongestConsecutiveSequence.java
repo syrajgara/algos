@@ -38,8 +38,8 @@ public class LongestConsecutiveSequence {
         continue; // duplicate
       }
 
-      int leftSequenceLength = map.containsKey(i-1) ? map.get(i-1) : 0;
-      int rightSequenceLength = map.containsKey(i+1) ? map.get(i+1) : 0;
+      int leftSequenceLength = map.getOrDefault(i - 1, 0);
+      int rightSequenceLength = map.getOrDefault(i + 1, 0);
 
       int currentLength = leftSequenceLength + rightSequenceLength + 1;
 

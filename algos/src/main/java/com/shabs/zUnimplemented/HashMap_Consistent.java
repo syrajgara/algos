@@ -1,4 +1,4 @@
-package com.shabs.datastructures.map;
+package com.shabs.zUnimplemented;
 
 /**
  * for slot size 10, normal hasmap will (mod by 10)

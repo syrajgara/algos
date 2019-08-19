@@ -1,4 +1,4 @@
-package com.shabs.datastructures.graph;
+package com.shabs.recurssion;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

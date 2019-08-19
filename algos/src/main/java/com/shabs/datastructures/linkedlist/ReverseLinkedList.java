@@ -2,13 +2,16 @@ package com.shabs.datastructures.linkedlist;
 
 import com.shabs.datastructures.node.Node;
 
-public class ReverseLinkedList {
+/**
+ * Given a singly linked list, reverse it
+ */
+public class ReverseLinkedList<T> {
 
-  public Node<Integer> reverse(Node<Integer> root) {
-    Node<Integer> newRoot = null;
+  public Node<T> reverse(Node<T> root) {
+    Node<T> newRoot = null;
 
     while (root != null) {
-      Node<Integer> next = root.getNext();
+      Node<T> next = root.getNext();
 
       root.setNext(newRoot);
       newRoot = root;

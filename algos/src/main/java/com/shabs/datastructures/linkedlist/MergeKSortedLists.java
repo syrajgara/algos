@@ -1,6 +1,7 @@
 package com.shabs.datastructures.linkedlist;
 
 import com.shabs.datastructures.node.Node;
+import java.util.Comparator;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class MergeKSortedLists {
 
   public LinkedList<Integer> sort(List<LinkedList<Integer>> list) {
 
-    PriorityQueue<Node<Integer>> pq = new PriorityQueue<>((o1, o2) -> o1.getData().compareTo(o2.getData()));
+    PriorityQueue<Node<Integer>> pq = new PriorityQueue<>(Comparator.comparing(o -> o.getData()));
 
     for (LinkedList<Integer> ll : list) {
       pq.add(ll.root);

@@ -45,7 +45,9 @@ public class LinkedListPalindrome {
     pointerSlow.printLinkedList("pointerSlow");
 
     Node<Character> forwardPointer = list.root;
-    Node<Character> reversePointer = reverse(pointerSlow);
+    ReverseLinkedList<Character> reverser = new ReverseLinkedList<>();
+
+    Node<Character> reversePointer = reverser.reverse(pointerSlow);
 
     forwardPointer.printLinkedList("forwardPointer");
     reversePointer.printLinkedList("reversePointer");
@@ -61,34 +63,6 @@ public class LinkedListPalindrome {
     }
 
     return true;
-  }
-
-  private Node<Character> reverse3(Node<Character> pointer, Node<Character> previousPointer) {
-
-    if (pointer == null) {
-      return previousPointer;
-    }
-
-    Node<Character> nextPointer = pointer.getNext();
-    pointer.setNext(previousPointer);
-
-    return reverse3(nextPointer, pointer);
-  }
-
-  private Node<Character> reverse(Node<Character> currentPointer) {
-
-    if (currentPointer.getNext() == null) {
-      return currentPointer;
-    }
-
-    Node<Character> nextPointer = currentPointer.getNext();
-    Node<Character> returnPointer = reverse(nextPointer);
-
-    nextPointer.setNext(currentPointer);
-    // previous recursive call, will set this to the correct value
-    currentPointer.setNext(null);
-
-    return returnPointer;
   }
 
   @Test

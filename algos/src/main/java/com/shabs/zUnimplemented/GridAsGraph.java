@@ -1,4 +1,4 @@
-package com.shabs.datastructures.graph;
+package com.shabs.zUnimplemented;
 
 /**
  * A grid (n * m) can also be represented as a graph,
