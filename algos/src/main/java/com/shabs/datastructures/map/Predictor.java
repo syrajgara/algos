@@ -11,12 +11,11 @@ import java.util.Random;
  # and a method predict which predicts the next word in a sequence, yield a prediction
  # weighted by frequency of inputs. i.e.
  # predictor.accept("roses are red")
- # predictor.accept("somethign are red")
  # predictor.accept("violets are blue")
  # predictor.predict("are") should give red with 1/2 probability, and blue with 1/2 probability
  # if we add another line, predictor.accept("are green") predictor.predict("are") should give 1/3 probability to each (red, blue, green)
 
- // Map<"are", Map<"red",2>>
+ // Map<"are", Map<"red",1>>
  // Map<"are", Map<"blue",1>>
  */
 
@@ -51,7 +50,6 @@ public class Predictor {
       currentSum / total
 */
       for (int i = 1; i <= se.getValue(); i++) {
-
         listOfFollowingWords.add(se.getKey());
       }
     }

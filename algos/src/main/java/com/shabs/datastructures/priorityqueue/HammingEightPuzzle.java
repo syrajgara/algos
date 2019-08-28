@@ -208,9 +208,9 @@ public class HammingEightPuzzle {
       int[][] clone = new int[board.length][board.length];
 
       // deep copy elements
-      for (int y = 0; y < board.length; y++) {
-        for (int x = 0; x < board.length; x++) {
-          clone[y][x] = board[y][x];
+      for (int row = 0; row < board.length; row++) {
+        for (int col = 0; col < board.length; col++) {
+          clone[row][col] = board[row][col];
         }
       }
 

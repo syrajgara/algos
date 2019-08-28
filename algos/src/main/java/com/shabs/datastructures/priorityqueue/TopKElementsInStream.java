@@ -55,7 +55,6 @@ public class TopKElementsInStream {
 
         // we are giving preference to the newest datum
         // - even though its frequency could be same as older ones
-        // - this could throw off the list, if the older shows up more times later
         Node<Integer,Integer> nodeToRemove = removeSlots.remove();
         slots.remove(nodeToRemove.key);
         slots.put(datum, 0);

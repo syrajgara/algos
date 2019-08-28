@@ -33,7 +33,7 @@ class IteratorClient {
  *
  * List of SortedIterators - size of list n
  *
- * take first elements of each iterator in the list and put in PQHolder and in PQ
+ * take first elements of each iterator in the list and put in PQElement and in PQ
  * when you remove one element from the PQ, insert the next() from that iterator
  *
  * Time - O(log n) - due to use of priority queue
@@ -41,24 +41,24 @@ class IteratorClient {
  */
 class SortedIteratorMultiple<E extends Comparable<E>> implements SortedIterator<E> {
 
-  static class PQHolder<E extends Comparable<E>> implements Comparable<PQHolder<E>> {
+  static class PQElement<E extends Comparable<E>> implements Comparable<PQElement<E>> {
     E elem;
-    SortedIterator<E> iter;
+    SortedIterator<E> iter; // iterator from which this elem came
 
-    PQHolder(E elem, SortedIterator<E> iter) {
+    PQElement(E elem, SortedIterator<E> iter) {
       this.elem = elem;
       this.iter = iter;
     }
 
-    public int compareTo(PQHolder<E> other) {
+    public int compareTo(PQElement<E> other) {
       return elem.compareTo(other.elem);
     }
   }
 
-  private PriorityQueue<PQHolder<E>> pq;
+  private PriorityQueue<PQElement<E>> pq;
 
   public SortedIteratorMultiple(List<SortedIterator<E>> iterators) {
-    pq = new PriorityQueue<>(iterators.size());
+    pq = new PriorityQueue<>(iterators.size()); // we will store maximum 1 element from each iterator
     initPQ(iterators);
   }
 
@@ -66,8 +66,7 @@ class SortedIteratorMultiple<E extends Comparable<E>> implements SortedIterator<
     // take first elem from each iterator and put in PQ
     for (SortedIterator<E> si : iterators) {
       if (si != null && si.hasNext()) {
-        PQHolder<E> h = new PQHolder<>(si.next(), si);
-        pq.add(h);
+        pq.add(new PQElement<>(si.next(), si));
       }
     }
   }
@@ -81,13 +80,12 @@ class SortedIteratorMultiple<E extends Comparable<E>> implements SortedIterator<
       throw new ArrayIndexOutOfBoundsException("No more elements!");
     }
 
-    PQHolder<E> h = pq.remove();
+    PQElement<E> pqElement = this.pq.remove();
 
-    if (h.iter.hasNext()) {
-      PQHolder<E> newH = new PQHolder<>(h.iter.next(), h.iter);
-      pq.add(newH);
+    if (pqElement.iter.hasNext()) {
+      pq.add((new PQElement<>(pqElement.iter.next(), pqElement.iter)));
     }
 
-    return h.elem;
+    return pqElement.elem;
   }
 }

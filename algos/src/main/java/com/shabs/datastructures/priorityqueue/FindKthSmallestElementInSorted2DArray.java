@@ -64,14 +64,14 @@ public class FindKthSmallestElementInSorted2DArray {
   @Test
   public void test() {
     int[][] input = {
-        {1, 2, 3, 4},
-        {5, 6, 7, 8},
+        {1, 2, 4, 5},
+        {2, 3, 7, 8},
         {9, 10, 11, 12},
         {13, 14, 15, 16}
     };
 
-    int k = 7;
-    int expected = 7;
+    int k = 9;
+    int expected = 9;
 
     int actual = find(input, k);
 

@@ -3,6 +3,16 @@ package com.shabs.datastructures.matrix;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * 2D matrix - rows in ascending, cols in ascending
+ *
+ * - Start with center cell, divide into 4 quadrant, eliminate one quadrant each pass.
+ *
+ * right bottom quadrant always bigger than center
+ * left top quadrant always smaller than center
+ * other 2 quadrants could be a mix
+ * which means we can eliminate only right bottom or left top quadrant in each pass.
+ */
 public class Search2DMatrix {
 
   private boolean search(int[][] input, int target) {

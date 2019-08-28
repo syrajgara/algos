@@ -1,40 +1,14 @@
-package com.shabs.datastructures.matrix;
-
-import org.testng.annotations.Test;
+package com.shabs.zUnimplemented;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.testng.annotations.Test;
 
 public class FindRectangles {
-
-  @Test
-  public void test() {
-    int[][] image = {
-        {1, 0, 1, 1, 1, 1, 1},
-        {1, 0, 0, 1, 0, 1, 1},
-        {1, 1, 1, 0, 0, 0, 1},
-        {1, 0, 1, 1, 0, 1, 1},
-        {1, 0, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 0, 1, 1},
-        {1, 1, 1, 0, 0, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1},
-    };
-
-    List<Rectangle> rectangles = findRectangle(image);
-    for (Rectangle r : rectangles) {
-      r.print();
-    }
-
-    // O(r * c)
-    // O(1)
-  }
 
   public static class Cell {
     public int row;
     public int col;
-
-    public Cell() {
-    }
 
     public Cell(int row, int col) {
       this.row = row;
@@ -46,9 +20,6 @@ public class FindRectangles {
     Cell startCell;
     int length;
     int height;
-
-    public Rectangle() {
-    }
 
     public Rectangle(Cell cell, int length, int height) {
       this.startCell = cell;
@@ -111,6 +82,28 @@ public class FindRectangles {
     }
 
     return length;
+  }
+
+  @Test
+  public void test() {
+    int[][] image = {
+        {1, 0, 1, 1, 1, 1, 1},
+        {1, 0, 0, 1, 0, 1, 1},
+        {1, 1, 1, 0, 0, 0, 1},
+        {1, 0, 1, 1, 0, 1, 1},
+        {1, 0, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 1, 1},
+        {1, 1, 1, 0, 0, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1},
+    };
+
+    List<Rectangle> rectangles = findRectangle(image);
+    for (Rectangle r : rectangles) {
+      r.print();
+    }
+
+    // O(r * c)
+    // O(1)
   }
 }
 

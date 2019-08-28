@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 /**
  * 2D matrix - rows in ascending, cols in ascending
  *
- * - Start with the right top corner
+ * - Start with the right top corner (or left corner) and eliminate one row or col - to leave resulting matrix as a single rectangle
+ *
  * - if equal to target - you found it
  * - if target is less - move column left
  * - if target is more - move row down

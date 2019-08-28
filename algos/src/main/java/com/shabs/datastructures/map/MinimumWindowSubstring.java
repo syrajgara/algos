@@ -8,8 +8,7 @@ import java.util.Map;
 
 /**
  * given strings S and T
- * find smallest substring of S that contains all chars from T
- * in any order - not dynamic longest common subsequence
+ * find smallest substring of S that contains all chars from T in any order - not dynamic longest common subsequence
  * <p>
  * have two pointers, start and end
  * FREQUENCY Map of chars in T
@@ -30,10 +29,7 @@ public class MinimumWindowSubstring {
 
   private String find(String s, String t) {
 
-    Map<Character, Integer> tMap = new HashMap<>();
-    for (Character c : t.toCharArray()) {
-      tMap.put(c, tMap.getOrDefault(c, 0) + 1);
-    }
+    Map<Character, Integer> tMap = getCharacterFrequency(t);
 
     int substringLength = Integer.MAX_VALUE;
     int substringHead = 0;
@@ -65,6 +61,7 @@ public class MinimumWindowSubstring {
       // MOVE START -- adds(+) to tMap
       while (numTcharsStillToBeFound == 0) {
         Character currentStartChar = s.charAt(start);
+
         if (t.contains(currentStartChar.toString())) {
           // found one T char match
           if (end - start < substringLength) {
@@ -85,6 +82,14 @@ public class MinimumWindowSubstring {
     }
 
     return s.substring(substringHead, substringHead + substringLength);
+  }
+
+  private Map<Character, Integer> getCharacterFrequency(String t) {
+    Map<Character, Integer> tMap = new HashMap<>();
+    for (Character c : t.toCharArray()) {
+      tMap.put(c, tMap.getOrDefault(c, 0) + 1);
+    }
+    return tMap;
   }
 
   @Test
