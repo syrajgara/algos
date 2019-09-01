@@ -1,11 +1,6 @@
 package com.shabs.datastructures.string;
 
-/*
- * To execute Java, please define "static void main" on a class
- * named Solution.
- *
- * If you need more classes, simply define them inline.
- *
+/**
  * String input: xxyyyz
  * Output: x2y3z1
  */

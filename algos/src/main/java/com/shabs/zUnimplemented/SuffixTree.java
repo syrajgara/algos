@@ -1,4 +1,4 @@
-package com.shabs.datastructures.trie;
+package com.shabs.zUnimplemented;
 
 /**
  Suffix Tree - for ex, for word banana - create trie with

@@ -59,4 +59,22 @@ public class RomanToInteger {
 
     Assert.assertEquals(actual, expected);
   }
+
+  @Test
+  public void test2() {
+    String input = "XXIX";
+    int expected = 29;
+    int actual = romanToInt(input);
+
+    Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void test3() {
+    String input = "VII";
+    int expected = 7;
+    int actual = romanToInt(input);
+
+    Assert.assertEquals(actual, expected);
+  }
 }

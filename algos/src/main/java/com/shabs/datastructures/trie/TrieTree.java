@@ -36,13 +36,11 @@ public class TrieTree {
 
     for (int i = 0; i < word.length(); i++) {
       Character currChar = word.charAt(i);
-      TrieNode currentNode = null;
+      TrieNode currentNode;
 
       if (previousNode.links.containsKey(currChar)) {
         currentNode = previousNode.links.get(currChar);
-      }
-
-      if (currentNode == null) {
+      } else {
         currentNode = new TrieNode(word.charAt(i));
         previousNode.links.put(currChar, currentNode);
       }
@@ -53,8 +51,6 @@ public class TrieTree {
 
       previousNode = currentNode;
     }
-
-    previousNode.isWord = true;
   }
 
   public boolean searchWord(String word) {

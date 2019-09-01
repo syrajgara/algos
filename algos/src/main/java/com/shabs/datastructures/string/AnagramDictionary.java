@@ -1,8 +1,8 @@
 package com.shabs.datastructures.string;
 
 /**
- * A dictionary of words is given. you can pre-compute and store
- * so when a word is given, find all dict words that are its anagram
+ * A dictionary of words is given. When a word is given, find all dict words that are its anagram.
+ * (you can pre-compute and store)
  *
  * SOLN
  * for every word in dictionary, sort all chars of that word, use that as key and value as word itself

@@ -9,8 +9,6 @@ public class QueueWithArray {
   int currentHead = 0;
   int writeIndex = 0;
 
-  public QueueWithArray() {}
-
   public QueueWithArray(int capacity) {
     this.maxCapacity = capacity;
     list = new int[capacity];

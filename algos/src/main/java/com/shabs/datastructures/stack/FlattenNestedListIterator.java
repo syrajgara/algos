@@ -104,7 +104,7 @@ public class FlattenNestedListIterator<T> implements Iterator<T>, Iterable<T> {
     NestedValue<Integer> n3 = new NestedValue<>(i3);
     input.add(n3);
 
-    NestedValue<Integer> wrappedInput = new NestedValue<>(input);
+    NestedValue<Integer> wrappedInput = new NestedValue<Integer>(input);
 
     FlattenNestedListIterator<Integer> iterator = new FlattenNestedListIterator(wrappedInput);
 

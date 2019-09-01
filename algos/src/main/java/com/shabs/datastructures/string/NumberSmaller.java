@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
  * Similar to NumberLarger
  *
  * input =  75*4*1235
- * output = 75*3*421
+ * output = 75*3*5421
  *
  * from the right find the pivot where number increases (4 in above example)
  * that pivot number has to be swapped with the next smaller number, on its right (3)
