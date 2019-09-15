@@ -12,6 +12,16 @@ import org.testng.annotations.Test;
  * s = "aaabb", k = 3 =>> length = 3
  * s = "ababbc", k = 2 =>> length = 5
  *
+ * - 1st option
+ * - create frequency map for the chars in the string
+ * - have 2 pointers, left and right
+ * - move left till you find the char that has atleast k repeats in the frequency map
+ * - while moving left, any char that was ignore, reduce its frequency
+ * - repeat same from right side
+ * - if all frequencies >= k - you are done
+ * - else, move left or right pointer -- which side first???
+ *
+ * - 2nd option
  * - create frequency map for the chars in the string
  * - loop thru chars to find the lowest index,
  * ie index of char in the frequency with frequency >= K

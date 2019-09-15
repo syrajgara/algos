@@ -55,4 +55,13 @@ public class MaximumSubArrayProduct {
     int actual = maxProduct(input);
     Assert.assertEquals(actual, expected);
   }
+
+  @Test
+  public void maxProduct3() {
+    int[] input = {2, -3, 4};
+    int expected = 4;
+
+    int actual = maxProduct(input);
+    Assert.assertEquals(actual, expected);
+  }
 }

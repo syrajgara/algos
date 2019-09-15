@@ -1,5 +1,7 @@
 package com.shabs.dynamic.sum_this_or_that;
 
+import com.shabs.datastructures.node.Point;
+import com.shabs.datastructures.stack.Stack;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -42,6 +44,56 @@ public class UniquePathsInMatrix {
     return memoize[currentRow][currentCol];
   }
 
+  public int findPathsIterative(int startRow, int startCol, int endRow, int endCol, int[][] memoize) {
+
+    memoize[endRow][endCol] = 1; // path at the end point is 1
+
+    Stack<Point> pointStack = new Stack<>();
+    pointStack.push(new Point(startRow, startCol));
+
+    while (!pointStack.isEmpty()) {
+      Point currentPoint = pointStack.peek().getData();
+
+      if (currentPoint.row > endRow || currentPoint.col > endCol) {
+        // stepping out of the matrix, no paths - this currentPoint not useful
+        pointStack.pop();
+        continue;
+      }
+
+      if (memoize[currentPoint.row][currentPoint.col] != 0) {
+        // we have already calculated this
+        pointStack.pop();
+        continue;
+      }
+
+      if (currentPoint.row + 1 <= endRow && memoize[currentPoint.row + 1][currentPoint.col] == 0) {
+        pointStack.push(new Point(currentPoint.row + 1, currentPoint.col));
+        continue;
+      }
+
+      if (currentPoint.col + 1 <= endCol && memoize[currentPoint.row][currentPoint.col + 1] == 0) {
+        pointStack.push(new Point(currentPoint.row, currentPoint.col + 1));
+        continue;
+      }
+
+      int rightPaths = 0;
+      if (currentPoint.col + 1 <= endCol) {
+        rightPaths = memoize[currentPoint.row][currentPoint.col + 1];
+      }
+
+      int downPaths = 0;
+      if (currentPoint.row + 1 <= endRow) {
+        downPaths = memoize[currentPoint.row + 1][currentPoint.col];
+      }
+
+      memoize[currentPoint.row][currentPoint.col] = rightPaths + downPaths;
+
+      pointStack.pop();
+    }
+
+    return memoize[startRow][startCol]; // we should have calculated this by now
+  }
+
   private void print(int[][] memoize) {
     for (int row = 0; row < memoize.length; row++) {
       for (int col = 0; col < memoize[0].length; col++) {
@@ -81,6 +133,20 @@ public class UniquePathsInMatrix {
     // will not work if doMemoize=false
 
     int actual = findPaths(0, 0, 14, 14, memoize, true);
+    Assert.assertEquals(actual, expected);
+    print(memoize);
+  }
+
+  @Test
+  public void testIterative() {
+    int expected = 40116600;
+
+    // overflows after 16
+    int[][] memoize = new int[15][15];
+
+    // will not work if doMemoize=false
+
+    int actual = findPathsIterative(0, 0, 14, 14, memoize);
     Assert.assertEquals(actual, expected);
     print(memoize);
   }

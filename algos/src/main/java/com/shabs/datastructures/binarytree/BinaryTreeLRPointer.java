@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * / \  / \
  * 4->5->6->7 -> NULL
  * <p>
- * - LEVEL order travesal using QUEUE
+ * - LEVEL order traversal using QUEUE
  *
  * - recursive, connect node to the one on its right
  * - connect left to right
