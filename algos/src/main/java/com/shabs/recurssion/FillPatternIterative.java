@@ -47,6 +47,39 @@ public class FillPatternIterative {
     return output;
   }
 
+  private List<String> fillIterative(String pattern, Character[] fillers) {
+    List<String> patterns = new ArrayList<>();
+    int pIndex = 0;
+
+    while (pIndex < pattern.length()) {
+
+      List<String> newPatterns = new ArrayList<>();
+
+      if (pattern.charAt(pIndex) != '*') {
+        buildNewPattern(patterns, newPatterns, pattern.charAt(pIndex));
+      } else {
+        for (Character character : fillers) {
+          buildNewPattern(patterns, newPatterns, character);
+        }
+      }
+
+      patterns = newPatterns;
+      pIndex++;
+    }
+
+    return patterns;
+  }
+
+  private void buildNewPattern(List<String> patterns, List<String> newPatterns, Character character) {
+    if (patterns.isEmpty()) {
+      newPatterns.add(String.valueOf(character));
+    } else {
+      for (String currentPattern : patterns) {
+        newPatterns.add(currentPattern + character);
+      }
+    }
+  }
+
   @Test
   public void test() {
     String pattern = "*a**";
@@ -54,6 +87,14 @@ public class FillPatternIterative {
     Character[] filler = {'0', '1'};
 
     List<String> output = fill(pattern, filler);
+
+    for (String s : output) {
+      System.out.println(s);
+    }
+
+    System.out.println("\n");
+
+    output = fillIterative(pattern, filler);
 
     for (String s : output) {
       System.out.println(s);

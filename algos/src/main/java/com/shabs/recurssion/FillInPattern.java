@@ -18,14 +18,14 @@ import java.util.List;
  */
 public class FillInPattern {
 
-  private List<String> fill(String pattern, Character[] filler, int pIndex) {
+  private List<String> fill(String pattern, Character[] fillers, int pIndex) {
     List<String> output = new ArrayList<>();
 
     if (pIndex == pattern.length()) {
       return output;
     }
 
-    List<String> nextFragments = fill(pattern, filler, pIndex + 1);
+    List<String> nextFragments = fill(pattern, fillers, pIndex + 1);
 
     if (pattern.charAt(pIndex) != '*') {
       if (nextFragments.isEmpty()) {
@@ -39,7 +39,7 @@ public class FillInPattern {
       return output;
     }
 
-    for (Character c : filler) {
+    for (Character c : fillers) {
       if (nextFragments.isEmpty()) {
         output.add(String.valueOf(c));
       }

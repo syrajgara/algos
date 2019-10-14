@@ -1,10 +1,8 @@
-package com.shabs.bitmanipulation;
+package com.shabs.stream;
 
 import java.util.stream.Stream;
 
 /**
- * TODO
- *
  * given a list of words, return words that are spelt by using char from single row of a keyboard.
  *
  * Input: ["Hello", "Alaska", "Dad", "Peace"]

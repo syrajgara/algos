@@ -1,5 +1,6 @@
 package com.shabs.datastructures.graph;
 
+import java.util.Comparator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,7 +26,7 @@ public class MSTPrims {
   private int findMinWeight(GraphNode<Integer> rootNode) {
 
     PriorityQueue<GraphEdge<Integer>> edgePQ =
-        new PriorityQueue<>((o1,o2) -> Integer.compare(o1.weight, o2.weight));
+        new PriorityQueue<>(Comparator.comparingInt(o -> o.weight));
 
     checkAndAddToPQ(rootNode, edgePQ);
 
